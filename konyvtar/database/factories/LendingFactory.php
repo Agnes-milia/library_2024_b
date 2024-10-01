@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Book;
+use App\Models\Copy;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Copy>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Lending>
  */
-class CopyFactory extends Factory
+class LendingFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,12 +19,10 @@ class CopyFactory extends Factory
     public function definition(): array
     {
         return [
-        	'book_id' => Book::all()->random()->book_id,
+        	'user_id' => User::all()->random()->id,
             //jobbról nyitott intervallum
-            'hardcovered' => rand(0, 2),
-            'publication' => rand(1900, 2024),
-            'status' => rand(0, 3)
+            'copy_id' => Copy::all()->random()->copy_id,
+            'start' => fake()->date()
         ];
-
     }
 }

@@ -22,8 +22,8 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Copy::create(['book_id'=> 1]);
-        Copy::create(['book_id'=> 2]);
+        Copy::create(['book_id'=> 1, 'publication' => '2024']);
+        Copy::create(['book_id'=> 2, ]);
         Copy::create(['book_id'=> 3, 'publication' => '2024']);
         Copy::create(['book_id'=> 1]);
     }
