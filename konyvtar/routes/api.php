@@ -20,6 +20,6 @@ Route::get('/lendings', [LendingController::class, 'index']);
 //kebabcase javasolt, nincs $ az útvonalban!
 Route::get('/lending/{user_id}/{copy_id}/{start}', [LendingController::class, 'show']);
 Route::post('/lending', [LendingController::class, 'store']);
-//egyelőre ez nem helyes, mert csak a kulcsok vannak benne
-Route::put('/lending/{user_id}/{copy_id}/{start}', [LendingController::class, 'update']);
+//módosítás patch!!!, mert összetett kulcs
+Route::patch('/lending/{user_id}/{copy_id}/{start}', [LendingController::class, 'update']);
 Route::delete('/lending/{user_id}/{copy_id}/{start}', [LendingController::class, 'destroy']);

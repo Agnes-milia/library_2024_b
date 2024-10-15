@@ -22,7 +22,9 @@ class LendingFactory extends Factory
         	'user_id' => User::all()->random()->id,
             //jobbról nyitott intervallum
             'copy_id' => Copy::all()->random()->copy_id,
-            'start' => fake()->date()
+            'start' => fake()->date(),
+            //end direkt kihagyva, mert nullable
+            'warning'=> rand(0, 4)
         ];
     }
 }
