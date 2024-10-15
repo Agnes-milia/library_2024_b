@@ -9,8 +9,7 @@ Route::get('/', function () {
 });
 //levélküldés
 Route::get('send-mail', [MailController::class, 'index']);
-
-//fájlfeltöltés
+//file feltoltes
 Route::get('file-upload', [FileController::class, 'index']);
 Route::post('file-upload', [FileController::class, 'store'])->name('file.store');
 
