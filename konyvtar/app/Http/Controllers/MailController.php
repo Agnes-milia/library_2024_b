@@ -11,11 +11,11 @@ class MailController extends Controller
     public function index()
    {
        $mailData = [
-           'title' => 'Teszt levél',
+           'title' => 'Levél címe',
            'body' => 'Levél törzse'
        ];       
-       Mail::to('cicamica420420@gmail.com')
-    /* ->cc($moreUsers)
+       Mail::to('kisp777777@gmail.com')
+        /* ->cc($moreUsers)
         ->bcc($evenMoreUsers) */
         ->send(new DemoMail($mailData));
        dd("Email küldése sikeres.");
