@@ -23,8 +23,13 @@ Route::middleware(['auth:sanctum'])
 Route::middleware(['auth:sanctum',Admin::class])
     ->group(function () {
         Route::get('/admin/users', [UserController::class, 'index']);
-        
 });
+
+//összes kérés egy útvonalon
+Route::apiResource('/users', UserController::class);
+Route::patch('update-password/{id}', [UserController::class, 'updatePassword']);
+
+
 
 
 
