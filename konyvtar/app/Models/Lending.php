@@ -28,4 +28,11 @@ class Lending extends Model
         return $query;
     }
 
+    public function copies()
+        {  
+            //kapcsolat iránya, paraméterek sorrendje: model, honnan, hová
+            return $this->belongsTo(Copy::class, 'copy_id', 'copy_id');  
+        }
+
+
 }
