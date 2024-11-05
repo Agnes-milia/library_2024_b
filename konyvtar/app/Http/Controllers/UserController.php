@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -66,6 +67,14 @@ class UserController extends Controller
             "password" => Hash::make($request->password),
         ]);
         return response()->json(["user" => $user]);
+    }
+
+    public function userLendingsFilterByUser(){
+        $user = Auth::user();	//bejelentkezett felhasználó
+        //lendings: fg neve!!!
+        return User::with('lendings')
+        ->where('id', $user->id)
+        ->get();
     }
 
 }

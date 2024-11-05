@@ -51,4 +51,10 @@ class User extends Authenticatable
         return $this->role === 0;
     }
 
+    public function lendings()
+        {  
+            //kapcsolat iránya, paraméterek sorrendje: model, honnan, hová
+            return $this->hasMany(Lending::class, 'user_id','id');  
+        }
+
 }

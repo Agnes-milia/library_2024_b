@@ -14,4 +14,11 @@ class Book extends Model
         'author',
         'title'
     ];
+
+    public function copies()
+        {  
+            //kapcsolat iránya, paraméterek sorrendje: model, honnan, hová
+            return $this->hasMany(Copy::class, 'book_id', 'book_id');  
+        }
+
 }

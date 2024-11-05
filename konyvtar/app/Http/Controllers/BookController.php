@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -44,5 +46,12 @@ class BookController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    //lekérdezések
+    public function booksFilterByUser(){
+        //copies: fg neve!!!
+        return Book::with('copies')
+        ->get();
     }
 }
