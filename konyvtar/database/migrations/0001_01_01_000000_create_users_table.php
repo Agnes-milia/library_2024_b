@@ -32,6 +32,12 @@ return new class extends Migration
             'role' => 0
         ]);
         User::create([
+            'name'=>'librarian1', 
+            'email'=> 'librarian1@librarian.hu',
+            'password' => Hash::make('librarian12345'),
+            'role' => 1
+        ]);
+        User::create([
             'name'=>'user', 
             'email'=> 'user@user.hu',
             'password' => Hash::make('user12345')

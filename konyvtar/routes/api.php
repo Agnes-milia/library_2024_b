@@ -6,6 +6,8 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\LendingController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\Librarian;
+use App\Http\Middleware\Warehouseman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,10 +20,8 @@ Route::get('/books-copies', [BookController::class, "booksFilterByUser"]);
 //autintikált felhasználó
 Route::middleware(['auth:sanctum'])
     ->group(function () {
-        Route::get('/user', function (Request $request) {
-            return $request->user();
-        });
-
+        //profil kezelése
+        Route::apiResource('/auth-users', UserController::class)->except(['destroy']);
         Route::get('/lendings-copies', [LendingController::class, "lendingsFilterByUser"]);
 
         Route::get('/user-lendings', [UserController::class, 'userLendingsFilterByUser']);
@@ -32,11 +32,21 @@ Route::middleware(['auth:sanctum'])
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 });
 //admin réteg
-Route::middleware(['auth:sanctum',Admin::class])
+Route::middleware(['auth:sanctum', Admin::class])
     ->group(function () {
-        Route::get('/admin/users', [UserController::class, 'index']);
+        //Route::get('/admin/users', [UserController::class, 'index']);
         //összes kérés egy útvonalon
-        Route::apiResource('/users', UserController::class);
+        Route::apiResource('/admin/users', UserController::class);
+});
+//librarian réteg
+Route::middleware(['auth:sanctum', Librarian::class])
+    ->group(function () {
+        //útvonalak
+});
+//warehouseman réteg
+Route::middleware(['auth:sanctum', Warehouseman::class])
+    ->group(function () {
+        //útvonalak
 });
 
 
