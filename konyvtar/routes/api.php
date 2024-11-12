@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CopyController;
 use App\Http\Controllers\LendingController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Admin;
@@ -47,7 +48,9 @@ Route::middleware(['auth:sanctum', Librarian::class])
 Route::middleware(['auth:sanctum', Warehouseman::class])
     ->group(function () {
         //útvonalak
+        Route::get('/warehouseman/copies/{title}', [CopyController::class, 'bookCopyCount']);
 });
+
 
 
 
