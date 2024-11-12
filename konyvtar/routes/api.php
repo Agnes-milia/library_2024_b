@@ -23,6 +23,14 @@ Route::middleware(['auth:sanctum'])
     ->group(function () {
         //profil kezelése
         Route::apiResource('/auth-users', UserController::class)->except(['destroy']);
+        //kölcsönzések száma
+        Route::get('/lendings-count', [LendingController::class, "lendingsCount"]);
+        //hány könyv?
+        Route::get('/lendings-count-distinct', [LendingController::class, 'lendingsCountDistinct']);
+        //hány példány van nálam
+        Route::get('/active-lendings-count', [LendingController::class, 'activeLendingsCount']);
+        //milyen könyvek vannak nálam?
+        Route::get('/active-lendings-data', [LendingController::class, 'activeLendingsData']);
         Route::get('/lendings-copies', [LendingController::class, "lendingsFilterByUser"]);
 
         Route::get('/user-lendings', [UserController::class, 'userLendingsFilterByUser']);

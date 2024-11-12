@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lending;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LendingController extends Controller
 {
@@ -63,6 +64,50 @@ class LendingController extends Controller
         return Lending::with('copies')
         ->where('user_id','=',$user->id)
         ->get();
+    }
+
+    //hányszor kölcsönöztem?
+    public function lendingsCount(){
+        $user = Auth::user();
+        $lendings = DB::table("lendings as l")
+        ->where('user_id', $user->id)
+        ->count();
+        return $lendings;
+    }
+
+    //hány könyvet köcsönöztem?
+    public function lendingsCountDistinct(){
+        $user = Auth::user();
+        $lendings = DB::table("lendings as l")
+        ->join('copies as c', 'l.copy_id', '=', 'c.copy_id')
+        ->where('user_id', $user->id)
+        ->distinct('c.book_id')
+        ->count();
+        return $lendings;
+    }
+
+    //hány példány van nálam?
+    public function activeLendingsCount(){
+        $user = Auth::user();
+        $lendings = DB::table("lendings as l")
+        ->where('user_id', $user->id)
+        ->whereNull("end")
+        ->count();
+        return $lendings;
+    }
+
+    //Milyen könyvek vannak nálam?
+    public function activeLendingsData(){
+        $user = Auth::user();
+        $lendings = DB::table("lendings as l")
+        ->select('b.book_id', 'author', 'title')
+        ->join('copies as c', 'l.copy_id', '=', 'c.copy_id')
+        ->join('books as b', 'c.book_id', '=', 'b.book_id')
+        ->where('user_id', $user->id)
+        ->whereNull("end")
+        ->groupBy('b.book_id')
+        ->get();
+        return $lendings;
     }
 
 }
