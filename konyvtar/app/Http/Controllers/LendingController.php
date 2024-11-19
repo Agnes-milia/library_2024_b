@@ -110,4 +110,17 @@ class LendingController extends Controller
         return $lendings;
     }
 
+    //Jelenítsd meg azon könyveket, amik nálam vannak legalább 3 hete (bejelentkezett felhasználó) vannak szerzővel és címmel!
+    public function booksILendFrom(){
+        $user = Auth::user();
+        $books = DB::table("lendings as l")
+        ->select("author", "title")
+        ->join("copies as c", "l.copy_id", "=", "c.copy_id")
+        ->join("books as b", "c.book_id", "=", "b.book_id")
+        ->where("user_id", $user->id)
+        ->whereNull("end")
+        ->whereRaw('DATEDIFF(CURRENT_DATE, l.start) > 21')
+        ->get();
+        return $books;
+    }
 }

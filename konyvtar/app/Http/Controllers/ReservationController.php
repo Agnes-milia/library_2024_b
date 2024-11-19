@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReservationController extends Controller
 {
@@ -63,5 +64,12 @@ class ReservationController extends Controller
         return Reservation::with('books')
         ->where('user_id','=',$user->id)
         ->get();
+    }
+
+    public function reservedCount(){
+        $user = Auth::user();
+        return DB::table("reservations")
+        ->where('user_id', $user->id)
+        ->count();
     }
 }

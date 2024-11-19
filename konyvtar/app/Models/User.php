@@ -56,5 +56,10 @@ class User extends Authenticatable
             //kapcsolat iránya, paraméterek sorrendje: model, honnan, hová
             return $this->hasMany(Lending::class, 'user_id','id');  
         }
+    
+    public function reservations() {
+        //kapcsolat iránya, paraméterek sorrendje: model, honnan, hová
+        return $this->hasMany(Reservation::class, 'user_id','id'); 
+    }
 
 }

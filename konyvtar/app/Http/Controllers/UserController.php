@@ -77,4 +77,11 @@ class UserController extends Controller
         ->get();
     }
 
+    public function userReservationsFilterByUser() {
+        $user = Auth::user();
+        return User::with('reservations')
+        ->where('id', '=', $user->id)
+        ->get();
+    }
+
 }

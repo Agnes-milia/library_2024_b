@@ -39,6 +39,10 @@ Route::middleware(['auth:sanctum'])
         Route::patch('update-password/{id}', [UserController::class, 'updatePassword']);
         Route::get('/reserved-books', [ReservationController::class, 'reservedBooks']);
 
+        Route::get('/user-reservations', [UserController::class, 'userReservationsFilterByUser']);
+        Route::get('/reserved-count', [ReservationController::class, 'reservedCount']);
+        Route::get('books-i-lend-from', [LendingController::class, 'booksILendFrom']);
+
         // Kijelentkezés útvonal
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 });
