@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -53,5 +54,14 @@ class ReservationController extends Controller
     public function destroy($user_id, $book_id, $start)
     {
         $this->show($user_id, $book_id, $start)->delete();
+    }
+
+    //spec lekérdezések
+    public function reservedBooks(){
+        $user = Auth::user();	//bejelentkezett felhasználó
+        //books: fg neve!!!
+        return Reservation::with('books')
+        ->where('user_id','=',$user->id)
+        ->get();
     }
 }
