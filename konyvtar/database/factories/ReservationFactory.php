@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
-use App\Models\Copy;
+use App\Models\Book;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Lending>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Reservation>
  */
-class LendingFactory extends Factory
+class ReservationFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,10 +21,10 @@ class LendingFactory extends Factory
         return [
         	'user_id' => User::all()->random()->id,
             //jobbról nyitott intervallum
-            'copy_id' => Copy::all()->random()->copy_id,
+            'book_id' => Book::all()->random()->book_id,
             'start' => fake()->date(),
-            //end direkt kihagyva, mert nullable
-            'warning'=> rand(0, 3)
+            //logikai értéket kapunk:
+            'message'=> rand(0, 1)
         ];
     }
 }

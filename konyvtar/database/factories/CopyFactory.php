@@ -20,8 +20,8 @@ class CopyFactory extends Factory
     {
         return [
         	'book_id' => Book::all()->random()->book_id,
-            //jobbról nyitott intervallum
-            'hardcovered' => rand(0, 2),
+            //jobbról zárt intervallum
+            'hardcovered' => rand(0, 1),
             'publication' => rand(1900, 2024),
             'status' => rand(0, 3)
         ];
