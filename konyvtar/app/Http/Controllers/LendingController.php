@@ -123,4 +123,21 @@ class LendingController extends Controller
         ->get();
         return $books;
     }
+
+    //patch kérés, autentikált útvonal!!
+    public function bringBack($copy_id, $start){
+        //bej-tt felh-ó
+        $user = Auth::user();
+        //kölcsönzés rekordja
+        $lending = $this->show($user->id, $copy_id, $start);
+        //mai dátumot kap az end mező
+        $lending->end = date(now());
+        $lending->save();
+        //másik esemény, ugyanolyan a kérés típusa!
+        /* DB::table('copies')
+        ->where('copy_id', $copy_id)
+        //update, insert paramétere lista!
+        ->update(['status' => 0]); */
+        DB::select('CALL toStore(?)', array($copy_id));
+    }
 }

@@ -42,7 +42,8 @@ Route::middleware(['auth:sanctum'])
         Route::get('/user-reservations', [UserController::class, 'userReservationsFilterByUser']);
         Route::get('/reserved-count', [ReservationController::class, 'reservedCount']);
         Route::get('books-i-lend-from', [LendingController::class, 'booksILendFrom']);
-
+        Route::patch('/bring-back/{copy_id}/{start}', [LendingController::class, 'bringBack']);
+        
         // Kijelentkezés útvonal
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 });
@@ -56,7 +57,7 @@ Route::middleware(['auth:sanctum', Admin::class])
 //librarian réteg
 Route::middleware(['auth:sanctum', Librarian::class])
     ->group(function () {
-        //útvonalak
+        Route::post('/store-lending', [LendingController::class, 'store']);
 });
 //warehouseman réteg
 Route::middleware(['auth:sanctum', Warehouseman::class])
